@@ -4,10 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FullstackBackendApplication {
+public class fullstackbackendapplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FullstackBackendApplication.class, args);
+		SpringApplication.run(fullstackbackendapplication.class, args);
 	}
 
 }
+
