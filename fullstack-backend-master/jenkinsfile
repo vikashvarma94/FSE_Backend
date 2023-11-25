@@ -11,17 +11,17 @@ pipeline {
             steps {
                 script{
                     echo 'MVN Build'
-                    bat "mvn clean install"
+                    sh "mvn clean install"
                 }
             }
         }
         stage('Build') {
             steps{
                 script{
-                    cmd 'docker build . -t vikashvarma94/fseb:1'
+                    sh 'docker build . -t vikashvarma94/fseb:1'
                     withCredentials([string(credentialsId: '', variable: 'docker_password')])
-                    cmd 'docker login -u vikashvarma94 -p $docker_password'
-                    cmd 'docker push vikashvarma94/fseb:1'
+                    sh 'docker login -u vikashvarma94 -p $docker_password'
+                    sh 'docker push vikashvarma94/fseb:1'
                 }
             }
 
