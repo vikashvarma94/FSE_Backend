@@ -3,15 +3,28 @@ pipeline {
     stages {
         stage('Commit SCM') {
             agent{
-            docker{
-            image 'maven'
-            args '-v $HOME/.m2:/root/.m2'
-            }
+                docker{
+                    image 'maven'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
             }
             steps {
-                echo 'Build'
-                bat "mvn clean install"
+                script{
+                    echo 'MVN Build'
+                    cmd "mvn clean install"
+                }
             }
+        }
+        stage('Build') {
+            steps{
+                script{
+                    cmd 'docker build . -t vikashvarma94/fseb:1'
+                    withCredentials([string(credentialsId: '', variable: 'docker_password')])
+                    cmd 'docker login -u vikashvarma94 -p $docker_password'
+                    cmd 'docker push vikashvarma94/fseb:1'
+                }
+            }
+
         }
     }
     }
