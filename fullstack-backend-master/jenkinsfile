@@ -12,7 +12,6 @@ pipeline {
                 step{
                     git 'https://github.com/vikashvarma94/FSE_Backend.git'
                 }
-
                 step {
                     script{
                         echo 'MVN Build'
