@@ -9,14 +9,16 @@ pipeline {
 //                 }
 //             }
             steps {
-                git 'https://github.com/vikashvarma94/FSE_Backend.git'
+                step{
+                    git 'https://github.com/vikashvarma94/FSE_Backend.git'
+                }
+
+                step {
+                    script{
+                        echo 'MVN Build'
+                        bat "mvn clean install"
+                }
             }
-//             steps {
-//                 script{
-//                     echo 'MVN Build'
-//                     bat "mvn clean install"
-//                 }
-//             }
         }
         stage('Build') {
             steps{
