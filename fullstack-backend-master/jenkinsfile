@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script{
                     echo 'MVN Build'
-                    sh "mvn clean install"
+                    bat "mvn clean install"
                 }
             }
         }
