@@ -11,17 +11,17 @@ pipeline {
             steps {
                 git 'https://github.com/vikashvarma94/FSE_Backend.git'
             }
-//             steps {
-//                 script{
-//                     echo 'MVN Build'
-//                     bat "mvn clean install"
-//                 }
-//             }
+            steps {
+                script{
+                    echo 'MVN Build'
+                    bat "mvn clean install"
+                }
+            }
         }
         stage('Build') {
             steps{
                 script{
-                    bat 'docker build . -t vikashvarma94/fseb:1'
+                    bat 'docker build ./fullstack-backend-master -t vikashvarma94/fseb:1'
                     withCredentials([string(credentialsId: '', variable: 'docker_password')])
                     bat 'docker login -u vikashvarma94 -p $docker_password'
                     bat 'docker push vikashvarma94/fseb:1'
