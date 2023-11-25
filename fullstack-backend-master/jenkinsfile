@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools{
-        maven 'Maven'
-    }
     stages {
         stage('Commit SCM') {
 //             agent{
@@ -11,6 +8,9 @@ pipeline {
 //                     args '-v $HOME/.m2:/root/.m2'
 //                 }
 //             }
+            steps {
+                git 'https://github.com/vikashvarma94/FSE_Backend.git'
+            }
             steps {
                 script{
                     echo 'MVN Build'
@@ -30,4 +30,4 @@ pipeline {
 
         }
     }
-    }
+ }
