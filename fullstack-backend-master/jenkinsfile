@@ -25,7 +25,7 @@ pipeline {
         stage('Pull Docker image') {
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'docker', variable: 'docker_password')]) {
+                    withCredentials([string(credentialsId:'docker', variable:'docker_password')]) {
                     bat 'docker build ./fullstack-backend-master -t vikashvarma94/fseb:1'
                     bat 'docker login -u vikashvarma94 -p $docker_password'
                     bat 'docker push vikashvarma94/fseb:1'}
