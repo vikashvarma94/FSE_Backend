@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools{
+        maven 'Maven'
+    }
     stages {
         stage('Commit SCM') {
 //             agent{
@@ -9,20 +12,23 @@ pipeline {
 //                 }
 //             }
             steps {
-                git 'https://github.com/vikashvarma94/FSE_Backend.git'
-                 script{
-                    echo 'MVN Build'
-                    bat "mvn clean install"
-                    }
-                }
+                git changelog: false, poll: false, url:'https://github.com/vikashvarma94/FSE_Backend.git'
+            }
         }
-        stage('Build') {
+        stage('MVN Build') {
+             steps {
+                  echo 'MVN Build'
+                  bat "mvn clean install"
+                 }
+             }
+        }
+        stage('Pull Docker image') {
             steps{
                 script{
+                    withCredentials([string(credentialsId: 'docker', variable: 'docker_password')]) {
                     bat 'docker build ./fullstack-backend-master -t vikashvarma94/fseb:1'
-                    withCredentials([string(credentialsId: '', variable: 'docker_password')])
                     bat 'docker login -u vikashvarma94 -p $docker_password'
-                    bat 'docker push vikashvarma94/fseb:1'
+                    bat 'docker push vikashvarma94/fseb:1'}
                 }
             }
 
