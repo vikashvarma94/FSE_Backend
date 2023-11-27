@@ -19,7 +19,6 @@ pipeline {
              steps {
                   echo 'MVN Build'
                   bat "mvn clean install"
-                 }
              }
         }
         stage('Pull Docker image') {
