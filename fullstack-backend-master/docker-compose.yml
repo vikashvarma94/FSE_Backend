@@ -1,16 +1,28 @@
 version: "1"
 
 services:
-  database:
-    build: ./database
-    container_name: database
-    restart: always
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vikasfse
     networks:
-      - spring_net
+      springboot-mysql-net:
 
-  backend:
-    build:
 
+  fseb:
+      container_name: fseb
+      build:
+        context: ./fullstack-backend-master
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      depends_on:
+        - mysqldb
+      networks:
+        springboot-mysql-net:
+      restart: on-failure
 
