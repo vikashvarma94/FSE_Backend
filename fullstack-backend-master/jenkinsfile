@@ -18,8 +18,8 @@ pipeline {
         stage('MVN Build') {
              steps {
                   echo 'MVN Build'
-                  dir "./fullstack-backend-master"
-                  bat "mvn clean install"
+                  dir ("./fullstack-backend-master"){
+                  bat "mvn clean install"}
              }
         }
         stage('Push Docker image') {
