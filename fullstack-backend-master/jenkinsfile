@@ -17,9 +17,16 @@ pipeline {
         }
         stage('MVN Build') {
              steps {
-                  echo 'MVN Build'
+                  echo 'MVN build'
                   dir ("./fullstack-backend-master"){
                   bat "mvn clean install"}
+             }
+        }
+        stage('MVN Build') {
+             steps {
+                 echo 'build docker image'
+                 dir ("./fullstack-backend-master"){
+                 bat "docker build -t vikashvarma94/fseb:1"}
              }
         }
         stage('Push Docker image') {
