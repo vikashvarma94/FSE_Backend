@@ -31,7 +31,7 @@ pipeline {
         stage('Push Docker image') {
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'DockerHub_Pwd', variable: 'dockerHub_Pwd')]) {
+                    withCredentials([string(credentialsId: 'dockerHub_Pwd', variable: 'dockerHub_Pwd')]) {
                     bat 'docker login -u vikashvarma94 -p $dockerHub_Pwd'
                     }
                     bat 'docker push vikashvarma94/fseb:1'
