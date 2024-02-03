@@ -25,8 +25,7 @@ pipeline {
         stage('Dokcer build') {
              steps {
                  echo 'build docker image'
-                 dir ("./fullstack-backend-master"){
-                 bat "docker build -t vikashvarma94/fseb:1"}
+                 bat "docker build ./fullstack-backend-master -t vikashvarma94/fseb:1"
              }
         }
         stage('Push Docker image') {
