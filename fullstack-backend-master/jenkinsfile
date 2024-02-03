@@ -22,7 +22,7 @@ pipeline {
                   bat "mvn clean install"}
              }
         }
-        stage('MVN Build') {
+        stage('Dokcer build') {
              steps {
                  echo 'build docker image'
                  dir ("./fullstack-backend-master"){
