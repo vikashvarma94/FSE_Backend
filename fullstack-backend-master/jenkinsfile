@@ -22,7 +22,7 @@ pipeline {
                   bat "mvn clean install"}
              }
         }
-        stage('Dokcer build') {
+        stage('Docker build') {
              steps {
                  echo 'build docker image'
                  bat "docker build ./fullstack-backend-master -t vikashvarma94/fseb:1"
@@ -31,9 +31,8 @@ pipeline {
         stage('Push Docker image') {
             steps{
                 script{
-                    withCredentials([string(credentialsId:'docker', variable:'docker_password')]) {
-                    bat 'docker build ./fullstack-backend-master -t vikashvarma94/fseb:1'
-                    bat 'docker login -u vikashvarma94 -p $docker_password'
+                    withCredentials([file(credentialsId: '', variable: 'dockerHub_Pwd'), string(credentialsId: 'DockerHub_Pwd', variable: '')]) {
+                    bat 'docker login -u vikashvarma94 -p $dockerHub_Pwd'
                     bat 'docker push vikashvarma94/fseb:1'}
                 }
             }
