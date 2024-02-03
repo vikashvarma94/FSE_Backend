@@ -21,7 +21,7 @@ pipeline {
                   bat "mvn clean install"
              }
         }
-        stage('Pull Docker image') {
+        stage('Push Docker image') {
             steps{
                 script{
                     withCredentials([string(credentialsId:'docker', variable:'docker_password')]) {

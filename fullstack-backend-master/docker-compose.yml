@@ -12,7 +12,6 @@ services:
     networks:
       springboot-mysql-net:
 
-
   fseb:
       container_name: fseb
       build:
