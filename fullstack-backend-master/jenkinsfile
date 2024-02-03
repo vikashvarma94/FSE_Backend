@@ -18,6 +18,7 @@ pipeline {
         stage('MVN Build') {
              steps {
                   echo 'MVN Build'
+                  cd "./fullstack-backend-master"
                   bat "mvn clean install"
              }
         }
