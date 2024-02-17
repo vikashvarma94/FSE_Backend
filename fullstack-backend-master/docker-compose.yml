@@ -1,4 +1,4 @@
-version: "1"
+version: "3"
 
 services:
   mysqldb:
@@ -7,21 +7,34 @@ services:
     ports:
       - "3307:3306"
     environment:
+      MYSQL_HOST: mysqldb
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: vikasfse
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - fse-db:/var/lib/mysql
     networks:
-      springboot-mysql-net:
+      - fse-net
 
   fseb:
-      container_name: fseb
+      container_name: fseb1
       build:
-        context: ./fullstack-backend-master
         dockerfile: Dockerfile
       ports:
         - "8080:8080"
       depends_on:
         - mysqldb
       networks:
-        springboot-mysql-net:
-      restart: on-failure
+        - fse-net
+     # restart: on-failure
+
+#create a network
+networks:
+  fse-net:
+
+#create a volume
+volumes:
+  fse-db:
+
 
